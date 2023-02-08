@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <h1>Delete Lead</h1>
+  <p>Are you sure you want to delete the lead "{{ object.first_name }} {{ object.last_name }}"?</p>
+  <form method="post">
+    {% csrf_token %}
+    <input type="submit" value="Confirm">
+    <a href="{% url 'lead_list' %}">Cancel</a>
+  </form>
+{% endblock %}
