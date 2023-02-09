@@ -34,16 +34,12 @@ class Lead(models.Model):
 
 class Agent(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
-    organisation =models.ForeignKey(UserProfile, on_delete=models.CASCADE)
+    organisation = models.ForeignKey(UserProfile, on_delete=models.CASCADE)
 
 
 def post_user_created_signal(sender, instance, created, **kwargs):
     if created:
         UserProfile.objects.create(user=instance)
-
-
-
-    pass
 
 
 post_save.connect(post_user_created_signal, sender=User)

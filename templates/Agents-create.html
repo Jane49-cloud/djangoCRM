@@ -1,0 +1,23 @@
+{% extends 'base.html'%} 
+{% block content %}
+
+<style>
+    input{
+        margin: 10px;
+        border: solid 1px black;       
+    }
+    .btn {
+        color: black;
+    }
+</style>         
+<div class=" container card" >
+    <h1>Create a new  Agent</h1>
+    <form method="post">
+      {% csrf_token %}
+      {{ form.as_p }}
+     <button type="submit" class="btn btn-primary">create</button>
+    </form>
+  
+</div>
+
+ {% endblock %}

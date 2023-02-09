@@ -30,5 +30,6 @@ urlpatterns = [
     # TODO Auth urls
     path("login/", LoginView.as_view(template_name='login.html'), name="login"),
     path("signup/", SignupView.as_view(), name="signup"),
-    path("logout/", LogoutView.as_view(), name="logout")
+    path("logout/", LogoutView.as_view(), name="logout"),
+    path('agents/', include('agents.urls', namespace='agents')),
 ]
