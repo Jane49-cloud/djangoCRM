@@ -20,8 +20,16 @@ class SignupView(CreateView):
 
 class LeadListView(LoginRequiredMixin, ListView):
     template_name = "lead_list.html"
-    queryset = Lead.objects.all()
     context_object_name = "leads"
+
+    def get_queryset(self):
+        user = self.request.user
+        if user.is_organiser:
+            queryset = Lead.objects.filter(organisation=user.userprofile)
+        else:
+            queryset = Lead.objects.filter(organisation=user.agent.organisation)
+            queryset = queryset.filter(agent__user=user)
+        return queryset
 
 
 class LeadDetailsView(LoginRequiredMixin, DetailView):
@@ -36,6 +44,9 @@ class LeadCreateView(LoginRequiredMixin, CreateView):
     success_url = reverse_lazy('lead_list')
 
     def form_valid(self, form):
+        lead = form.save(commit=False)
+        lead.organisation = self.request.user.userprofile
+        lead.save()
         send_mail(
             subject="A new lead has been created",
             message="Go to the site and view the new lead",

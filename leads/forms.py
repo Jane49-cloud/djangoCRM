@@ -18,7 +18,9 @@ class LeadModelForm(forms.ModelForm):
             'source',
             'profile_picture',
             'special_files',
-            'agent'
+            'agent',
+            'cellphone',
+            'email'
         ]
 
 
