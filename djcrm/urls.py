@@ -14,6 +14,8 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
+from django.conf import settings
+from django.conf.urls.static import static
 from django.urls import path, include, reverse_lazy
 from django.contrib.auth.views import LoginView, LogoutView, PasswordResetView,PasswordResetDoneView,PasswordResetConfirmView, PasswordResetCompleteView
 from leads.views import LeadListView, LeadDetailsView, LeadCreateView, LeadUpdateView, LeadDeleteView, SignupView, landing_page
@@ -21,8 +23,8 @@ from leads.views import LeadListView, LeadDetailsView, LeadCreateView, LeadUpdat
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', landing_page, name="landing-page"),
-    path('leads/all/', LeadListView.as_view(), name="lead_list"),
+    path('', landing_page, name="landing_page"),
+    path('leads/', LeadListView.as_view(), name="lead_list"),
     path('leads/create/', LeadCreateView.as_view(), name="create_lead"),
     path('leads/<int:pk>/', LeadDetailsView.as_view(), name="lead_details"),
     path('leads/<int:pk>/update/', LeadUpdateView.as_view(), name="lead_update"),
@@ -40,3 +42,5 @@ urlpatterns = [
     path('password_reset_complete/', PasswordResetDoneView.as_view(template_name="password_reset_complete.html"),
          name="password_reset_complete"),
 ]
+if settings.DEBUG:
+    urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

@@ -1,23 +1,18 @@
-{% extends 'base.html'%} 
+{% extends 'base.html'%}
+{% load tailwind_filters %}
 {% block content %}
 
-<style>
-    input{
-        margin: 10px;
-        border: solid 1px black;       
-    }
-    .btn {
-        color: black;
-    }
-</style>         
-<div class=" container card" >
-    <h1>Create a new lead</h1>
-    <form method="post" enctype="multipart/form-data">
+<div class=" max-w-lg mx-auto  shadow-md p-3">
+    <form method="post" enctype="multipart/form-data" >
       {% csrf_token %}
-      {{ form.as_p }}
-     <button type="submit" class="btn btn-primary">create</button>
+      {{ form|crispy}}
+     <button type="submit" class="btn text-black w-full bg-blue-600 hover:bg-blue-400">Sign in</button>
+
+        <div>
+            <p>Already have an Account?</p>
+            <a href="{% url 'login'%}">Login</a>
+        </div>
     </form>
-  
 </div>
 
  {% endblock %}

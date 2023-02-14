@@ -24,8 +24,12 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    # TODO add local apps here
     'leads',
     'agents',
+    # TODO add third-party apps here
+    "crispy_forms",
+    "crispy_tailwind",
 ]
 
 MIDDLEWARE = [
@@ -114,3 +118,6 @@ EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
 
 LOGIN_REDIRECT_URL = "/leads/all"
 LOGIN_URL = "/login"
+
+CRISPY_ALLOWED_TEMPLATE_PACKs = 'tailwind'
+CRISPY_TEMPLATE_PACK = 'tailwind'
